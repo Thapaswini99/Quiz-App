@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question.Question %>
+</p>
+
+<p>
+  <strong>Variety:</strong>
+  <%= @question.variety %>
+</p>
+
+<p>
+  <strong>Subgenre:</strong>
+  <%= @question.subgenre.name %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |

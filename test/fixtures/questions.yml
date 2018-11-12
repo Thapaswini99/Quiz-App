@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Question: MyString
+  variety: MyString
+  subgenre: one
+
+two:
+  Question: MyString
+  variety: MyString
+  subgenre: two

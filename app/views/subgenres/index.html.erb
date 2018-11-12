@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Subgenres</h1>
+<% if Array(User.where(:id => session[:user_id])).first.id == 1 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% Array(@subgenres).each do |subgenre| %>
+        <tr>
+          <td><%= subgenre.name %></td>
+          <td><%= subgenre.genre.name %></td>
+            <td><%= link_to 'Edit', edit_subgenre_path(subgenre) %></td>
+          <td><%= link_to 'Destroy', subgenre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'create questions', {:controller => "questions", :action => "new", :subgenre => subgenre.id} %></td>
+          <td><%= link_to 'list the questions'  , {:controller => "questions", :action => "index", :subgenre => subgenre.id} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Back', genres_url %>
+<% end %>
+<br>
+<% if Array(User.where(:id => session[:user_id])).first.id != 1 %>
+    <table>
+      <tbody>
+        <% Array(@subgenres).each do |subgenre| %>
+            <%= link_to subgenre.name , {:controller => "questions", :action => "index", :subgenre => subgenre.id} %>
+            <br/>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>

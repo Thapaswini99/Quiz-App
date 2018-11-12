@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Option: MyString
+  flag: false
+  question: one
+
+two:
+  Option: MyString
+  flag: false
+  question: two

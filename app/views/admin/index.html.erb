@@ -1,0 +1,13 @@
+
+
+<% if Array(User.where(:id => session[:user_id])).first.id == 1 %>
+  <%= link_to 'List all users', users_url %>
+  </br>
+  <%= link_to 'List all Genres', genres_url %>
+  </br>
+  <%= link_to 'signout', controller: "sessions",  action: "destroy" %>
+<% end %>
+
+ <% if Array(User.where(:id => session[:user_id])).first.id != 1 %>
+  <h1>UNAUTHORIZED AUTHENTICATION</h1>
+  <% end %>

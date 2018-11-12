@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Score</h1>
+<h2>
+<%= @scores.Score %>
+</h2>
+<br/>
+<br/>
+<h3>Congratulations!!!!!!!</h3>
+<%= link_to  "go back to quiz", {:controller => "genres", :action => "index"} %>
+<br/>
+<br/>
+<h2> LEADERBOARD for a particular Subgenre</h2>
+<table>
+  <tr>
+    <td>sl.no</td>
+    <td>name of the contestant</td>
+    <td>score</td>
+  </tr>
+<% i=1 %>
+<% @boards.each do |board| %>
+  <tr>
+  <td><%= i %></td>
+  <% name = User.find_by(:id => board.user_id).name %>
+  <td> <%= name %> </td>
+  <td> <%= board.Score %> </td>
+  <% i = i+1 %>
+</tr>
+
+<% end %>

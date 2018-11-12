@@ -1,0 +1,6 @@
+<h1>Welcome to the Quiz!!!!!!!!<h1>
+<h2><%= Array(User.where(:id => session[:user_id])).first.name %></h2>
+<body>
+<%= link_to 'Genres', controller: "genres", action: "index" %>
+<br/>
+<%= link_to 'signout', controller: "sessions",  action: "destroy" %>

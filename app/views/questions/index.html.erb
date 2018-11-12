@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+<% if Array(User.where(:id => session[:user_id])).first.id == 1 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Variety</th>
+        <th>Subgenre</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.Question %></td>
+          <td><%= question.variety %></td>
+          <td><%= question.subgenre.name %></td>
+          <td><%= link_to 'Show', question %></td>
+          <td><%= link_to 'Edit', edit_question_path(question) %></td>
+          <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'add option', {:controller => "options", :action => "new", :question => question.id} %> </td>
+          <td><%= link_to 'options'  , {:controller => "options", :action => "index", :question => question.id} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<br>
+<% if Array(User.where(:id => session[:user_id])).first.id != 1 %>
+  <%= form_tag do %>
+    <% @questions.each do |question| %>
+      <p> Question Type : <%= question.variety %> </p>
+          <%= label_tag question.Question %><br/>
+               <form method="POST" >
+                 <tr>
+                   <p hidden><%= text_field_tag(:qid,question.id) %></p>
+                 <% @options = Option.where(question_id: question.id) %>
+
+                   <tr>
+                     <td><%= check_box_tag(:a) %>
+                     <%= @options[0].Option %></td>
+                   </tr>
+                   <br/>
+                   <tr>
+                     <td><%= check_box_tag(:b) %>
+                     <%= @options[1].Option %></td>
+                   </tr>
+                   <br/>
+                   <tr>
+                     <td><%= check_box_tag(:c)%>
+                     <%= @options[2].Option %></td>
+                   </tr>
+                   <br/>
+                   <tr>
+                     <td><%= check_box_tag(:d) %>
+                     <%= @options[3].Option %></td>
+                   </tr>
+
+                 </tr>
+               </td>
+               </tr>
+               <br>
+             </table>
+             <%= submit_tag("submit", :id => "myButton") %>
+             <br/>
+             <br/>
+        <% end %>
+    <% end %>
+  </br>
+</br>
+    <%= link_to "finish quiz", {:controller => "scores", :action => "index", :userid => Array(User.where(:id => session[:user_id])).first.id, :subgenreid => params[:subgenre]} %>
+
+    <% end %>
+
+
+<!-- <% if Array(User.where(:id => session[:user_id])).first.id != 1 %>
+  <% i=1 %>
+  <% @questions.each do |question| %>
+    <%=  link_to 'Question' + i.to_s, {:controller => "options", :action => "index", :question => question.id} %>
+    <br/>
+    <% i = i+1 %>
+  <% end %>
+<% end %> -->
